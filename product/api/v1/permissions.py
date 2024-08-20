@@ -14,7 +14,9 @@ class IsStudentOrIsAdmin(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         # TODO
-        pass
+        if request.user == obj.user:
+            return True
+        return False
 
 
 class ReadOnlyOrIsAdmin(BasePermission):

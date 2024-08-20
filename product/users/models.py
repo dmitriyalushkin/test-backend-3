@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+NULLABLE = {'blank': True, 'null': True}
+
+
 class CustomUser(AbstractUser):
     """Кастомная модель пользователя - студента."""
 
@@ -30,6 +33,15 @@ class Balance(models.Model):
     """Модель баланса пользователя."""
 
     # TODO
+    balance_user = models.IntegerField(
+        default=1000,
+        verbose_name='Баланс пользователя',
+    )
+    сustom_user = models.ForeignKey(CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name='пользователь',
+        ** NULLABLE,
+    )
 
     class Meta:
         verbose_name = 'Баланс'
@@ -41,6 +53,12 @@ class Subscription(models.Model):
     """Модель подписки пользователя на курс."""
 
     # TODO
+    сustom_user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name='пользователь',
+        **NULLABLE,
+    )
 
     class Meta:
         verbose_name = 'Подписка'

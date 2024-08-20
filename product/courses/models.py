@@ -1,6 +1,9 @@
 from django.db import models
 
 
+NULLABLE = {'blank': True, 'null': True}
+
+
 class Course(models.Model):
     """Модель продукта - курса."""
 
@@ -15,7 +18,12 @@ class Course(models.Model):
     start_date = models.DateTimeField(
         auto_now=False,
         auto_now_add=False,
-        verbose_name='Дата и время начала курса'
+        verbose_name='Дата и время начала курса',
+    )
+    price = models.IntegerField(
+        default=0,
+        verbose_name='Стоимость курса',
+        **NULLABLE,
     )
 
     # TODO
@@ -39,6 +47,12 @@ class Lesson(models.Model):
     link = models.URLField(
         max_length=250,
         verbose_name='Ссылка',
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name='курс',
+        ** NULLABLE,
     )
 
     # TODO
