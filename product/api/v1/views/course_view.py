@@ -60,6 +60,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     permission_classes = (ReadOnlyOrIsAdmin,)
 
     def get_serializer_class(self):
+
         if self.action in ['list', 'retrieve']:
             return CourseSerializer
         return CreateCourseSerializer
