@@ -56,7 +56,6 @@ class GroupViewSet(viewsets.ModelViewSet):
 class CourseViewSet(viewsets.ModelViewSet):
     """Курсы """
 
-
     queryset = Course.objects.all()
     permission_classes = (ReadOnlyOrIsAdmin,)
 
